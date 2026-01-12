@@ -1,776 +1,517 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>James Connors | Portfolio</title>
+    <meta charset="UTF-8">
+    <title>James Connors | Game Systems Programmer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <style>
-    :root{
-      --bg: #f4f6f9;
-      --panel: rgba(255,255,255,.78);
-      --panel-strong: rgba(255,255,255,.92);
-      --text: #0e1525;
-      --muted: rgba(14,21,37,.68);
-      --border: rgba(14,21,37,.10);
-      --shadow: 0 12px 40px rgba(16, 24, 40, .08);
-      --shadow-soft: 0 8px 24px rgba(16, 24, 40, .06);
-      --radius: 18px;
-      --radius-sm: 14px;
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: #f5f7fa;
+            color: #2d3748;
+            overflow-x: hidden;
+        }
 
-      --accent: #1b5cff;          /* tweak this */
-      --accent-2: #00c2ff;        /* subtle gradient helper */
-      --chip: rgba(14,21,37,.06);
+        .container {
+            display: flex;
+            height: 100vh;
+        }
 
-      --maxw: 1150px;
-      --leftw: 360px;
+        /* Left Panel - Fixed */
+        .left-panel {
+            width: 380px;
+            background: white;
+            padding: 3rem 2.5rem;
+            box-shadow: 2px 0 20px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
 
-      --focus: 0 0 0 4px rgba(27,92,255,.18);
-    }
+        .profile-section h1 {
+            font-size: 2rem;
+            color: #1a202c;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
 
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      color: var(--text);
-      background:
-        radial-gradient(1200px 600px at 20% 0%, rgba(27,92,255,.10), transparent 55%),
-        radial-gradient(900px 500px at 85% 20%, rgba(0,194,255,.10), transparent 55%),
-        var(--bg);
-      line-height: 1.45;
-    }
+        .profile-section p {
+            line-height: 1.7;
+            color: #4a5568;
+            margin-bottom: 2rem;
+        }
 
-    a{ color: inherit; text-decoration:none; }
-    a:focus-visible, button:focus-visible, summary:focus-visible{
-      outline:none;
-      box-shadow: var(--focus);
-      border-radius: 12px;
-    }
+        .action-buttons {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 3rem;
+            justify-content: center;
+        }
 
-    /* Layout */
-    .wrap{
-      max-width: var(--maxw);
-      margin: 0 auto;
-      padding: 26px 18px 30px;
-      height: 100%;
-    }
+        .btn {
+            padding: 0.85rem 2rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            text-align: center;
+        }
 
-    .grid{
-      display:grid;
-      grid-template-columns: var(--leftw) 1fr;
-      gap: 18px;
-      align-items: start;
-      min-height: calc(100vh - 56px);
-    }
+        .btn-primary {
+            background: #1e40af;
+            color: white;
+        }
 
-    /* Panels */
-    .panel{
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
+        .btn-primary:hover {
+            background: #1e3a8a;
+            transform: translateY(-1px);
+        }
 
-    /* Left / sidebar */
-    .sidebar{
-      position: sticky;
-      top: 18px;
-      padding: 22px;
-    }
+        .btn-secondary {
+            background: #1e40af;
+            color: white;
+        }
 
-    .name{
-      font-size: 28px;
-      letter-spacing: -0.02em;
-      margin: 0 0 4px;
-    }
-    .role{
-      margin:0 0 14px;
-      color: var(--muted);
-      font-weight: 520;
-    }
+        .btn-secondary:hover {
+            background: #1e3a8a;
+            transform: translateY(-1px);
+        }
 
-    .about{
-      margin: 14px 0 18px;
-      color: rgba(14,21,37,.78);
-      font-size: 15.5px;
-    }
+        .skills-section h2 {
+            font-size: 1.3rem;
+            color: #1a202c;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
 
-    .actions{
-      display:flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin: 14px 0 18px;
-    }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.6rem;
+        }
 
-    .iconBtn{
-      display:inline-flex;
-      align-items:center;
-      gap: 10px;
-      padding: 12px 12px;
-      border-radius: 14px;
-      background: var(--panel-strong);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-soft);
-      transition: transform .15s ease, border-color .15s ease, background .15s ease;
-      user-select:none;
-    }
-    .iconBtn:hover{
-      transform: translateY(-1px);
-      border-color: rgba(27,92,255,.25);
-    }
+        .skill-tag {
+            padding: 0.75rem 0.5rem;
+            background: white;
+            border: 1.5px solid #d1d5db;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #4b5563;
+            text-align: center;
+            transition: all 0.2s;
+        }
 
-    .icon{
-      width: 34px; height: 34px;
-      display:grid; place-items:center;
-      border-radius: 12px;
-      background: linear-gradient(135deg, rgba(27,92,255,.14), rgba(0,194,255,.12));
-      border: 1px solid rgba(27,92,255,.18);
-    }
-    .icon svg{ width: 18px; height: 18px; opacity:.92; }
+        .skill-tag:hover {
+            border-color: #9ca3af;
+            background: #f9fafb;
+        }
 
-    .iconBtn .label{
-      display:flex;
-      flex-direction: column;
-      line-height: 1.1;
-    }
-    .iconBtn .label b{
-      font-size: 13.5px;
-    }
-    .iconBtn .label span{
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 2px;
-    }
+        /* Right Panel - Scrollable */
+        .right-panel {
+            margin-left: 380px;
+            flex: 1;
+            padding: 3rem 3rem 3rem 2rem;
+            overflow-y: auto;
+            height: 100vh;
+        }
 
-    .sectionTitle{
-      margin: 18px 0 10px;
-      font-size: 12px;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: rgba(14,21,37,.55);
-    }
+        .projects-header {
+            margin-bottom: 2rem;
+        }
 
-    .chips{
-      display:flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .chip{
-      padding: 9px 12px;
-      border-radius: 999px;
-      background: var(--chip);
-      border: 1px solid rgba(14,21,37,.08);
-      font-size: 13px;
-      color: rgba(14,21,37,.78);
-      user-select:none;
-    }
+        .projects-header h1 {
+            font-size: 2.5rem;
+            color: #1a202c;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
 
-    .mini{
-      margin-top: 16px;
-      padding-top: 14px;
-      border-top: 1px solid rgba(14,21,37,.10);
-      color: var(--muted);
-      font-size: 13px;
-      display:flex;
-      justify-content: space-between;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .mini a{ color: rgba(27,92,255,.92); }
-    .mini a:hover{ text-decoration: underline; }
+        .projects-header p {
+            color: #64748b;
+            font-size: 1.05rem;
+        }
 
-    /* Right / main */
-    .main{
-      padding: 18px;
-      overflow: hidden;
-    }
+        .projects-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
 
-    .mainHeader{
-      padding: 14px 14px 10px;
-      display:flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 12px;
-    }
-    .mainHeader h2{
-      margin:0;
-      font-size: 20px;
-      letter-spacing: -0.01em;
-    }
-    .mainHeader p{
-      margin:0;
-      color: var(--muted);
-      font-size: 13.5px;
-    }
+        .project-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 1px solid #e5e7eb;
+            overflow: hidden;
+        }
 
-    .toolbar{
-      display:flex;
-      gap:10px;
-      align-items:center;
-      flex-wrap: wrap;
-    }
+        .project-card:hover {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+            transform: translateY(-2px);
+            border-color: #2563eb;
+        }
 
-    .search{
-      position: relative;
-    }
-    .search input{
-      width: 260px;
-      max-width: 48vw;
-      padding: 10px 12px 10px 38px;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      background: var(--panel-strong);
-      outline:none;
-      box-shadow: var(--shadow-soft);
-      font-size: 13.5px;
-    }
-    .search .mag{
-      position:absolute;
-      left: 12px; top: 50%;
-      transform: translateY(-50%);
-      opacity: .55;
-      width: 16px; height: 16px;
-    }
+        .project-card.expanded {
+            cursor: default;
+            transform: none;
+        }
 
-    .filter{
-      padding: 10px 12px;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      background: var(--panel-strong);
-      box-shadow: var(--shadow-soft);
-      font-size: 13.5px;
-      color: rgba(14,21,37,.80);
-      outline:none;
-    }
+        .project-card.expanded:hover {
+            transform: none;
+        }
 
-    .projects{
-      display:grid;
-      gap: 12px;
-      padding: 6px;
-      max-height: calc(100vh - 110px);
-      overflow: auto;
-      scrollbar-gutter: stable;
-    }
+        .project-preview {
+            display: block;
+        }
 
-    /* nicer scrollbar */
-    .projects::-webkit-scrollbar{ width: 10px; }
-    .projects::-webkit-scrollbar-thumb{
-      background: rgba(14,21,37,.16);
-      border-radius: 999px;
-      border: 3px solid transparent;
-      background-clip: content-box;
-    }
+        .project-card.expanded .project-preview {
+            display: none;
+        }
 
-    /* Project card (accordion) */
-    details.project{
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,.82);
-      box-shadow: var(--shadow-soft);
-      overflow: hidden;
-      transition: border-color .15s ease, transform .15s ease;
-    }
-    details.project:hover{
-      transform: translateY(-1px);
-      border-color: rgba(27,92,255,.20);
-    }
-    details.project[open]{
-      background: rgba(255,255,255,.92);
-      border-color: rgba(27,92,255,.22);
-    }
+        .project-details {
+            display: none;
+        }
 
-    summary{
-      list-style: none;
-      cursor: pointer;
-      padding: 14px 14px 12px;
-      display:flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 12px;
-    }
-    summary::-webkit-details-marker{ display:none; }
+        .project-card.expanded .project-details {
+            display: block;
+        }
 
-    .projTop{
-      display:flex;
-      gap: 12px;
-      align-items: flex-start;
-      min-width: 0;
-    }
+        .project-thumbnail {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
 
-    .badge{
-      width: 40px; height: 40px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, rgba(27,92,255,.16), rgba(0,194,255,.12));
-      border: 1px solid rgba(27,92,255,.20);
-      display:grid; place-items:center;
-      flex: 0 0 auto;
-    }
-    .badge svg{ width: 18px; height: 18px; opacity: .9; }
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
 
-    .projMeta{
-      min-width: 0;
-    }
-    .projMeta h3{
-      margin: 0;
-      font-size: 16px;
-      letter-spacing: -0.01em;
-    }
-    .projMeta .subtitle{
-      margin: 4px 0 0;
-      color: var(--muted);
-      font-size: 13.5px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      max-width: 540px;
-    }
+        .close-btn {
+            background: #f3f4f6;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #6b7280;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
 
-    .projSide{
-      display:flex;
-      align-items:center;
-      gap: 10px;
-      flex: 0 0 auto;
-    }
-    .pillRow{
-      display:flex;
-      gap: 6px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-      max-width: 260px;
-    }
-    .pill{
-      font-size: 12px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: rgba(14,21,37,.06);
-      border: 1px solid rgba(14,21,37,.08);
-      color: rgba(14,21,37,.78);
-      user-select:none;
-    }
+        .close-btn:hover {
+            background: #e5e7eb;
+            color: #374151;
+        }
 
-    .chev{
-      width: 26px; height: 26px;
-      border-radius: 10px;
-      display:grid; place-items:center;
-      border: 1px solid rgba(14,21,37,.10);
-      background: rgba(255,255,255,.8);
-      transition: transform .18s ease;
-    }
-    details[open] .chev{ transform: rotate(180deg); }
+        .project-card h3 {
+            font-size: 1.4rem;
+            color: #1a202c;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
 
-    .projBody{
-      padding: 0 14px 14px;
-    }
-    .projBody .desc{
-      margin: 0 0 10px;
-      color: rgba(14,21,37,.78);
-      font-size: 14.5px;
-    }
+        .project-card.expanded h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
 
-    .links{
-      display:flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 10px;
-    }
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      gap: 8px;
-      padding: 10px 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(14,21,37,.12);
-      background: rgba(255,255,255,.9);
-      box-shadow: var(--shadow-soft);
-      font-size: 13.5px;
-      color: rgba(14,21,37,.90);
-      transition: transform .15s ease, border-color .15s ease;
-    }
-    .btn:hover{
-      transform: translateY(-1px);
-      border-color: rgba(27,92,255,.25);
-    }
-    .btn.primary{
-      border-color: rgba(27,92,255,.25);
-      background: linear-gradient(135deg, rgba(27,92,255,.14), rgba(0,194,255,.10));
-    }
-    .btn svg{ width: 16px; height: 16px; opacity: .9; }
+        .project-card p {
+            color: #64748b;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
 
-    .divider{
-      height: 1px;
-      background: rgba(14,21,37,.10);
-      margin: 12px 0;
-    }
+        .project-description-full {
+            color: #4a5568;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            font-size: 1.05rem;
+        }
 
-    .bullets{
-      margin: 10px 0 0;
-      padding-left: 18px;
-      color: rgba(14,21,37,.76);
-      font-size: 14px;
-    }
-    .bullets li{ margin: 6px 0; }
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
 
-    /* Mobile */
-    @media (max-width: 940px){
-      .grid{
-        grid-template-columns: 1fr;
-      }
-      .sidebar{
-        position: relative;
-        top: 0;
-      }
-      .projects{
-        max-height: none;
-      }
-      .projMeta .subtitle{
-        max-width: 62vw;
-      }
-    }
-  </style>
+        .project-tag {
+            padding: 0.35rem 0.75rem;
+            background: #f1f5f9;
+            color: #475569;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: #1a202c;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .github-link:hover {
+            background: #2d3748;
+            transform: translateY(-1px);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .left-panel {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+
+            .right-panel {
+                margin-left: 0;
+                height: auto;
+            }
+        }
+    </style>
 </head>
-
 <body>
-  <div class="wrap">
-    <div class="grid">
-      <!-- LEFT PANEL -->
-      <aside class="panel sidebar">
-        <h1 class="name">James Connors</h1>
-        <p class="role">Game Systems / Gameplay Programmer</p>
-
-        <p class="about">
-          I’m a Computer Science student at Penn State (Class of 2028) focused on the systems that power gameplay—
-          under-the-hood logic, tools, and technical problem solving.
-        </p>
-
-        <div class="actions">
-          <!-- Resume -->
-          <a class="iconBtn" href="assets/James_Connors_Resume.pdf" target="_blank" rel="noopener">
-            <span class="icon" aria-hidden="true">
-              <!-- file icon -->
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                <path d="M14 2v6h6"/>
-                <path d="M8 13h8M8 17h8M8 9h2"/>
-              </svg>
-            </span>
-            <span class="label">
-              <b>Resume</b>
-              <span>PDF</span>
-            </span>
-          </a>
-
-          <!-- Contact -->
-          <a class="iconBtn" href="mailto:yourname@psu.edu">
-            <span class="icon" aria-hidden="true">
-              <!-- mail icon -->
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M4 4h16v16H4z"/>
-                <path d="m22 6-10 7L2 6"/>
-              </svg>
-            </span>
-            <span class="label">
-              <b>Contact</b>
-              <span>email me</span>
-            </span>
-          </a>
-
-          <!-- Optional: LinkedIn / GitHub quick buttons (edit links) -->
-          <a class="iconBtn" href="https://github.com/YOUR_GITHUB" target="_blank" rel="noopener">
-            <span class="icon" aria-hidden="true">
-              <!-- github-ish icon -->
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M9 19c-4 1.5-4-2.5-5-3m10 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 18 4.77 5.07 5.07 0 0 0 17.91 1S16.73.65 14 2.48a13.38 13.38 0 0 0-5 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77 5.44 5.44 0 0 0 3.5 8.52c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
-              </svg>
-            </span>
-            <span class="label">
-              <b>GitHub</b>
-              <span>projects</span>
-            </span>
-          </a>
-        </div>
-
-        <div class="sectionTitle">Languages &amp; Tools</div>
-        <div class="chips">
-          <span class="chip">C#</span>
-          <span class="chip">Unity</span>
-          <span class="chip">Java</span>
-          <span class="chip">Python</span>
-          <span class="chip">Git</span>
-          <span class="chip">JDBC / SQL</span>
-        </div>
-
-        <div class="mini">
-          <span>© <span id="year"></span> James Connors</span>
-          <span><a href="#projects">Jump to projects</a></span>
-        </div>
-      </aside>
-
-      <!-- RIGHT PANEL -->
-      <main class="panel main" id="projects">
-        <div class="mainHeader">
-          <div>
-            <h2>Projects</h2>
-            <p>Click a card to expand. Use search to filter.</p>
-          </div>
-
-          <div class="toolbar">
-            <div class="search">
-              <svg class="mag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <circle cx="11" cy="11" r="7"></circle>
-                <path d="M21 21l-4.3-4.3"></path>
-              </svg>
-              <input id="search" type="text" placeholder="Search projects..." autocomplete="off" />
+    <div class="container">
+        <!-- Left Panel -->
+        <aside class="left-panel">
+            <div class="profile-section">
+                <h1>About Me</h1>
+                <p>
+                    I'm a Computer Science student at Penn State (Class of 2028) with a passion for designing and programming the systems that power gameplay. My focus lies on the technical side of game development—developing the under-the-hood logic that shapes how games function and feel.
+                </p>
+                
+                <div class="action-buttons">
+                    <a href="#" class="btn btn-primary">Resume</a>
+                    <a href="#" class="btn btn-secondary">Contact</a>
+                </div>
             </div>
 
-            <select id="tagFilter" class="filter" aria-label="Filter by tag">
-              <option value="">All tags</option>
-              <option value="unity">Unity</option>
-              <option value="csharp">C#</option>
-              <option value="java">Java</option>
-              <option value="python">Python</option>
-              <option value="systems">Systems</option>
-            </select>
-          </div>
-        </div>
-
-        <section class="projects" id="projectList">
-
-          <!-- PROJECT CARD TEMPLATE:
-               - data-tags: space-separated tags used by search/filter
-               - Put your links in the buttons (GitHub, Demo, Write-up page)
-          -->
-
-          <details class="project" data-tags="unity csharp systems vr">
-            <summary>
-              <div class="projTop">
-                <div class="badge" aria-hidden="true">
-                  <!-- cube icon -->
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-                    <path d="M3.3 7l8.7 5 8.7-5"/>
-                    <path d="M12 22V12"/>
-                  </svg>
+            <div class="skills-section">
+                <h2>Languages & Tools</h2>
+                <div class="skills-grid">
+                    <div class="skill-tag">C#</div>
+                    <div class="skill-tag">Python</div>
+                    <div class="skill-tag">Java</div>
+                    <div class="skill-tag">Unity</div>
                 </div>
-                <div class="projMeta">
-                  <h3>VR Submarine Level Mod (Unity / IL2CPP)</h3>
-                  <p class="subtitle">Large-scale VR level with interactive systems, tools, and scripted sequences.</p>
-                </div>
-              </div>
-
-              <div class="projSide">
-                <div class="pillRow" aria-hidden="true">
-                  <span class="pill">Unity</span>
-                  <span class="pill">C#</span>
-                  <span class="pill">VR</span>
-                </div>
-                <span class="chev" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M6 9l6 6 6-6"/>
-                  </svg>
-                </span>
-              </div>
-            </summary>
-
-            <div class="projBody">
-              <p class="desc">
-                Built interactive gameplay systems (wires, sabotage sequences, state resets) with robust debugging tools and
-                IL2CPP-safe patterns.
-              </p>
-
-              <div class="divider"></div>
-
-              <ul class="bullets">
-                <li>System-driven interactions (cut / clamp / route logic, failure states)</li>
-                <li>Reusable drivers for effects + sequences (no standard ParticleSystem)</li>
-                <li>Restart-safe object lifecycle management</li>
-              </ul>
-
-              <div class="links">
-                <a class="btn primary" href="#" target="_blank" rel="noopener">
-                  <!-- book icon -->
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
-                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-                  </svg>
-                  <span>Read more</span>
-                </a>
-                <a class="btn" href="#" target="_blank" rel="noopener">
-                  <!-- github icon -->
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M9 19c-4 1.5-4-2.5-5-3m10 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 18 4.77 5.07 5.07 0 0 0 17.91 1S16.73.65 14 2.48a13.38 13.38 0 0 0-5 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77 5.44 5.44 0 0 0 3.5 8.52c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
-                  </svg>
-                  <span>Code</span>
-                </a>
-              </div>
             </div>
-          </details>
+        </aside>
 
-          <details class="project" data-tags="java systems sql">
-            <summary>
-              <div class="projTop">
-                <div class="badge" aria-hidden="true">
-                  <!-- terminal icon -->
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M4 17l6-6-6-6"/>
-                    <path d="M12 19h8"/>
-                  </svg>
-                </div>
-                <div class="projMeta">
-                  <h3>Course Scheduler (Java Swing + JDBC)</h3>
-                  <p class="subtitle">Admin/Student UI with scheduling, waitlists, and database-backed queries.</p>
-                </div>
-              </div>
-
-              <div class="projSide">
-                <div class="pillRow" aria-hidden="true">
-                  <span class="pill">Java</span>
-                  <span class="pill">JDBC</span>
-                  <span class="pill">SQL</span>
-                </div>
-                <span class="chev" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M6 9l6 6 6-6"/>
-                  </svg>
-                </span>
-              </div>
-            </summary>
-
-            <div class="projBody">
-              <p class="desc">
-                Desktop app with robust scheduling logic, roster views, and waitlist promotion rules.
-              </p>
-              <div class="divider"></div>
-              <ul class="bullets">
-                <li>Database queries for enrollment + schedule state</li>
-                <li>Clean UI flows for add/drop + class list viewing</li>
-                <li>Edge-case handling: waitlist promotion and counts</li>
-              </ul>
-              <div class="links">
-                <a class="btn primary" href="#" target="_blank" rel="noopener">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
-                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-                  </svg>
-                  <span>Read more</span>
-                </a>
-                <a class="btn" href="#" target="_blank" rel="noopener">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M9 19c-4 1.5-4-2.5-5-3m10 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 18 4.77 5.07 5.07 0 0 0 17.91 1S16.73.65 14 2.48a13.38 13.38 0 0 0-5 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77 5.44 5.44 0 0 0 3.5 8.52c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
-                  </svg>
-                  <span>Code</span>
-                </a>
-              </div>
+        <!-- Right Panel -->
+        <main class="right-panel">
+            <div class="projects-header">
+                <h1>Projects</h1>
+                <p>Explore my game systems and programming work</p>
             </div>
-          </details>
 
-          <details class="project" data-tags="python tools systems">
-            <summary>
-              <div class="projTop">
-                <div class="badge" aria-hidden="true">
-                  <!-- sliders icon -->
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M4 21v-7"/>
-                    <path d="M4 10V3"/>
-                    <path d="M12 21V12"/>
-                    <path d="M12 8V3"/>
-                    <path d="M20 21v-5"/>
-                    <path d="M20 12V3"/>
-                    <path d="M2 14h4"/>
-                    <path d="M10 8h4"/>
-                    <path d="M18 16h4"/>
-                  </svg>
-                </div>
-                <div class="projMeta">
-                  <h3>Survey / Attendance Data Processor</h3>
-                  <p class="subtitle">Python tooling to merge multi-sheet inputs and generate clean outputs.</p>
-                </div>
-              </div>
+            <div class="projects-grid">
+                <!-- Project 1: Submarine Game -->
+                <div class="project-card" data-project="submarine">
+                    <div class="project-preview">
+                        <h3>Submarine Combat System</h3>
+                        <p>A physics-based underwater combat game featuring realistic submarine mechanics, torpedo tracking systems, and dynamic water pressure simulation.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Unity</span>
+                            <span class="project-tag">C#</span>
+                            <span class="project-tag">Physics</span>
+                        </div>
+                    </div>
 
-              <div class="projSide">
-                <div class="pillRow" aria-hidden="true">
-                  <span class="pill">Python</span>
-                  <span class="pill">Data</span>
-                  <span class="pill">Automation</span>
-                </div>
-                <span class="chev" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M6 9l6 6 6-6"/>
-                  </svg>
-                </span>
-              </div>
-            </summary>
+                    <div class="project-details">
+                        <div class="project-header">
+                            <h3>Submarine Combat System</h3>
+                            <button class="close-btn">×</button>
+                        </div>
 
-            <div class="projBody">
-              <p class="desc">
-                Scripted workflow for matching responses by ID, aligning question mappings, and exporting processed datasets.
-              </p>
-              <div class="divider"></div>
-              <ul class="bullets">
-                <li>Reliable lookups + row compilation across multiple inputs</li>
-                <li>Consistent outputs for downstream analysis</li>
-                <li>Designed to be easy to extend as forms evolve</li>
-              </ul>
-              <div class="links">
-                <a class="btn primary" href="#" target="_blank" rel="noopener">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
-                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-                  </svg>
-                  <span>Read more</span>
-                </a>
-                <a class="btn" href="#" target="_blank" rel="noopener">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M9 19c-4 1.5-4-2.5-5-3m10 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 18 4.77 5.07 5.07 0 0 0 17.91 1S16.73.65 14 2.48a13.38 13.38 0 0 0-5 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77 5.44 5.44 0 0 0 3.5 8.52c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
-                  </svg>
-                  <span>Code</span>
-                </a>
-              </div>
+                        <img src="SubmarineThumbnail.png" alt="Submarine Game" class="project-thumbnail">
+
+                        <p class="project-description-full">
+                            This project implements a comprehensive submarine combat system with realistic physics simulation. The game features advanced torpedo tracking algorithms, depth-based pressure mechanics that affect submarine maneuverability, and a sonar detection system. Players must manage their submarine's buoyancy, speed, and stealth capabilities while engaging enemy vessels in tactical underwater warfare.
+                        </p>
+
+                        <p class="project-description-full">
+                            Key technical achievements include implementing custom physics for underwater movement, developing an AI system for enemy submarines that uses predictive targeting, and creating a dynamic audio system that simulates sound propagation through water.
+                        </p>
+
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/6JHkInsZHDc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+
+                        <a href="https://github.com/jxc6819/submarine-game" class="github-link" target="_blank">
+                            <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2: Placeholder -->
+                <div class="project-card" data-project="inventory">
+                    <div class="project-preview">
+                        <h3>Dynamic Inventory System</h3>
+                        <p>A flexible, grid-based inventory system with drag-and-drop functionality, item stacking, and equipment slots designed for RPG games.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Unity</span>
+                            <span class="project-tag">C#</span>
+                            <span class="project-tag">UI Systems</span>
+                        </div>
+                    </div>
+
+                    <div class="project-details">
+                        <div class="project-header">
+                            <h3>Dynamic Inventory System</h3>
+                            <button class="close-btn">×</button>
+                        </div>
+
+                        <img src="https://via.placeholder.com/800x400/4a5568/ffffff?text=Inventory+System" alt="Inventory System" class="project-thumbnail">
+
+                        <p class="project-description-full">
+                            A comprehensive inventory management system built for RPG-style games. Features include drag-and-drop item management, automatic item stacking with configurable stack limits, equipment slots with stat bonuses, and a filtering system for quick item access.
+                        </p>
+
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+
+                        <a href="https://github.com/yourusername/inventory-system" class="github-link" target="_blank">
+                            <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 3: Placeholder -->
+                <div class="project-card" data-project="pathfinding">
+                    <div class="project-preview">
+                        <h3>AI Pathfinding Engine</h3>
+                        <p>An optimized pathfinding system using A* algorithm with dynamic obstacle avoidance and multi-agent coordination for strategy games.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">C#</span>
+                            <span class="project-tag">Algorithms</span>
+                            <span class="project-tag">AI</span>
+                        </div>
+                    </div>
+
+                    <div class="project-details">
+                        <div class="project-header">
+                            <h3>AI Pathfinding Engine</h3>
+                            <button class="close-btn">×</button>
+                        </div>
+
+                        <img src="https://via.placeholder.com/800x400/4a5568/ffffff?text=Pathfinding+Engine" alt="Pathfinding Engine" class="project-thumbnail">
+
+                        <p class="project-description-full">
+                            A high-performance pathfinding system designed for real-time strategy games. Implements A* with optimizations including jump point search, hierarchical pathfinding for large maps, and dynamic obstacle detection that recalculates paths only when necessary.
+                        </p>
+
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+
+                        <a href="https://github.com/yourusername/pathfinding-engine" class="github-link" target="_blank">
+                            <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+                </div>
             </div>
-          </details>
-
-        </section>
-      </main>
+        </main>
     </div>
-  </div>
 
-  <script>
-    // Footer year
-    document.getElementById("year").textContent = new Date().getFullYear();
+    <script>
+        // Handle project card clicks
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                // Don't toggle if clicking the close button or links
+                if (e.target.classList.contains('close-btn') || 
+                    e.target.tagName === 'A' || 
+                    e.target.closest('a')) {
+                    return;
+                }
 
-    // Filter logic (search + tag)
-    const search = document.getElementById("search");
-    const tagFilter = document.getElementById("tagFilter");
-    const cards = Array.from(document.querySelectorAll("details.project"));
+                // Close all other cards
+                document.querySelectorAll('.project-card').forEach(otherCard => {
+                    if (otherCard !== card) {
+                        otherCard.classList.remove('expanded');
+                    }
+                });
 
-    function applyFilters(){
-      const q = (search.value || "").trim().toLowerCase();
-      const tag = (tagFilter.value || "").trim().toLowerCase();
+                // Toggle this card
+                card.classList.toggle('expanded');
 
-      cards.forEach(card => {
-        const hay = card.textContent.toLowerCase();
-        const tags = (card.getAttribute("data-tags") || "").toLowerCase();
-        const matchQ = !q || hay.includes(q);
-        const matchTag = !tag || tags.split(/\s+/).includes(tag);
+                // Scroll to the card if it's being expanded
+                if (card.classList.contains('expanded')) {
+                    setTimeout(() => {
+                        card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 100);
+                }
+            });
 
-        card.style.display = (matchQ && matchTag) ? "" : "none";
-      });
-    }
-
-    search.addEventListener("input", applyFilters);
-    tagFilter.addEventListener("change", applyFilters);
-
-    // Optional: allow only one open at a time (comment out if you want multiple open)
-    document.querySelectorAll("details.project").forEach(d => {
-      d.addEventListener("toggle", () => {
-        if (!d.open) return;
-        document.querySelectorAll("details.project[open]").forEach(other => {
-          if (other !== d) other.removeAttribute("open");
+            // Handle close button
+            const closeBtn = card.querySelector('.close-btn');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    card.classList.remove('expanded');
+                });
+            }
         });
-      });
-    });
-  </script>
+    </script>
 </body>
 </html>
