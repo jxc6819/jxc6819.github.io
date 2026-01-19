@@ -192,7 +192,7 @@
 
         .project-thumbnail {
             width: 100%;
-            height: 250px;
+            height: 350px;
             object-fit: cover;
             border-radius: 8px;
             margin-bottom: 1.5rem;
@@ -474,6 +474,93 @@
                         </div>
 
                         <a href="https://github.com/jxc6819/BaseballGame" class="github-link" target="_blank">
+                            <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 4: Hospital Survey Data Processor -->
+                <div class="project-card" data-project="hospital">
+                    <div class="project-preview">
+                        <h3>Automated Hospital Survey Data Processor</h3>
+                        <p>An automated Python tool that consolidates pre-survey, post-survey, and attendance data into a single master spreadsheet, replacing a fully manual workflow previously handled by hospital staff.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Python</span>
+                            <span class="project-tag">Data Processing</span>
+                            <span class="project-tag">Automation</span>
+                            <span class="project-tag">Algorithm</span>
+                            <span class="project-tag">API</span>
+                        </div>
+                    </div>
+
+                    <div class="project-details">
+                        <div class="project-header">
+                            <h3>Automated Hospital Survey Data Processor</h3>
+                            <button class="close-btn">×</button>
+                        </div>
+
+                        <img src="HospitalThumbnail.png" alt="Hospital Survey Data Processor" class="project-thumbnail">
+
+                        <p class="project-description-full">
+                            This project is a Python automation I built for a hospital-run Narrative Medicine program to handle participant survey data. Previously, staff had to manually open pre-surveys, post-surveys, and attendance logs and then copy values into a master spreadsheet by hand, one person at a time. My script pulls data from all of those sources automatically, lines up participants across spreadsheets, converts written survey responses into consistent numeric values, and fills out the master sheet in a single run. It handles real-world messiness like participants completing only a pre-survey or post-survey, surveys with columns in different orders, incomplete responses, and attendance tracked as repeated entries instead of totals.
+                        </p>
+
+                        <p class="project-description-full">
+                            From a development standpoint, this project shows how I approach building systems that actually get used. I designed it to be flexible rather than brittle, using fuzzy matching and defensive checks so it could adapt as forms changed or data came in imperfectly. The end result turned what used to be 30–40 hours of repetitive manual work into a process that runs in about two minutes, while also reducing errors. It reflects my focus on understanding the full workflow, anticipating edge cases early, and building tools that are reliable, practical, and easy for non-technical users to rely on.
+                        </p>
+
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/jTPk6mxuHPc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+
+                        <a href="https://github.com/jxc6819/Automated-Hospital-Survey-Data-Processor" class="github-link" target="_blank">
+                            <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 5: Mycord TCP Chat Client -->
+                <div class="project-card" data-project="mycord">
+                    <div class="project-preview">
+                        <h3>Mycord TCP Chat Client</h3>
+                        <p>A multithreaded TCP chat client written in C that connects to a remote server, implements a custom binary message protocol, and supports real-time messaging with terminal-based formatting and alerts.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">C</span>
+                            <span class="project-tag">Networking</span>
+                            <span class="project-tag">Sockets</span>
+                            <span class="project-tag">TCP/IP</span>
+                            <span class="project-tag">Multithreading</span>
+                            <span class="project-tag">Linux</span>
+                        </div>
+                    </div>
+
+                    <div class="project-details">
+                        <div class="project-header">
+                            <h3>Mycord TCP Chat Client</h3>
+                            <button class="close-btn">×</button>
+                        </div>
+
+                        <img src="MyCordThumbnail.png" alt="Mycord Chat Client" class="project-thumbnail">
+
+                        <p class="project-description-full">
+                            This project is a custom client for the mycord chat service written in C for Linux and Unix systems. The client establishes a TCP connection to a remote server and implements a fixed-size binary message protocol to handle user login, message sending, message receiving, system notifications, and server disconnects. It supports command line configuration for IP, port, and domain name resolution, performs DNS lookup when connecting by domain, and formats incoming messages with timestamps, ANSI color highlighting, and audible alerts for user mentions. The application uses pthreads to concurrently receive network messages while reading user input from STDIN, allowing for real-time interaction without blocking.
+                        </p>
+
+                        <p class="project-description-full">
+                            From a technical perspective, this project demonstrates my ability to work close to the system and reason about networking, concurrency, and robustness under real constraints. I implemented socket communication, protocol parsing, input validation, and multithreaded coordination without relying on high-level abstractions, while carefully handling error cases to prevent invalid states or server disconnects. The project required designing around blocking I/O, coordinating clean shutdown across threads, and handling signals and EOF gracefully. Overall, this work reflects my comfort with low-level systems programming, defensive coding practices, and building reliable software that interacts directly with the operating system and the network.
+                        </p>
+
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/UMTVXexFbM8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+
+                        <a href="https://github.com/jxc6819/Mycord-Chat-Client" class="github-link" target="_blank">
                             <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
                                 <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
                             </svg>
